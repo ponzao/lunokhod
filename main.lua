@@ -17,13 +17,11 @@ local function dir_walk(func, path)
     end
 end
 
-local t4s = {}
 local words = {}
 for filename in coroutine.wrap(dir_walk), coroutine.yield, "./20_newsgroups" do
     for line in io.lines(filename) do
-        for word in line:gmatch("%w+") do
+        for word in line:gmatch("[%w_]+") do
             local word = word:lower()
-            if word == "t4" then t4s[#t4s + 1] = filename end
             words[word] = words[word] and words[word] + 1 or 1
         end
     end
@@ -57,6 +55,3 @@ io.close()
 
 print("Execution time was: " .. (os.time() - time_then) .. "s.")
 
-print()
-print("t4s")
-for i, v in ipairs(t4s) do print(v) end
