@@ -18,7 +18,7 @@ local function dir_walk(func, path)
 end
 
 local words = {}
-for filename in coroutine.wrap(dir_walk), coroutine.yield, "./20_newsgroups" do
+for filename in coroutine.wrap(dir_walk), coroutine.yield, arg[1] do
     for line in io.lines(filename) do
         for word in line:gmatch("[%w_]+") do
             local word = word:lower()
