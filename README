@@ -1,0 +1,7 @@
+lunokhod
+
+A word counter for files. It is recursive and accepts a directory as a
+parameter. Inspired by http://www.bestinclass.dk/index.php/2009/12/clojure-vs-ruby-scala-transient-newsgroups/.
+
+Usage:
+lua main.lua /foo/bar
