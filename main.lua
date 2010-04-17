@@ -1,18 +1,12 @@
 require("luarocks.require")
+require("pl")
 
 local time_then = os.time()
-local function dir_walk(func, path)
-    local lfs = require("lfs")
-    for file in lfs.dir(path) do
-        if file ~= "." and file ~= ".." then
-            local f = path .. "/" .. file
-            local attr = lfs.attributes(f)
-            if attr.mode == "directory" then
-                print("Processing: " .. f)
-                dir_walk(func, f)
-            else
-                func(f)
-            end
+
+local function dir_walk(func, fullpath)
+    for root, _, files in dir.walk(fullpath) do
+        for _, f in ipairs(files) do
+            func(path.join(root, f))
         end
     end
 end
